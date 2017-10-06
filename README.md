@@ -2,6 +2,8 @@
 
 ## Overview
 
+The OpenDXL Environment is a pre-configured environment that supports both development and running of OpenDXL solutions. 
+
 The OpenDXL Environment Docker image is available at the following location within [Docker Hub](https://hub.docker.com):
 
 [https://hub.docker.com/r/opendxl/opendxl-environment/](https://hub.docker.com/r/opendxl/opendxl-environment/)

@@ -6,11 +6,7 @@ The OpenDXL Environment is a pre-configured environment available as a Docker im
 
 The OpenDXL Environment is based on the Debian operating system and includes standard tools and libraries that are commonly used to develop and run OpenDXL solutions. The environment also includes a web front-end based on [Cloud Commander](http://cloudcmd.io/) that supports browser-based file management, file editing, and terminal access.
 
-Standard tools that are included with the environment include:
-* git, wget, curl, OpenSSL
-
-Standard OpenDXL libraries that are included with the environment include:
-* OpenDXL Python Client, OpenDXL Bootstrap
+The goal of the OpenDXL Environment is to provide a consistent way to develop OpenDXL solutions across platforms and eliminate the need to manually install commonly used tools (git, wget, curl, etc.) and libraries ([OpenDXL Python Client](https://github.com/opendxl/opendxl-client-python), [OpenDXL Bootstrap](https://github.com/opendxl/opendxl-bootstrap-python)).
 
 The OpenDXL Environment Docker image is available at the following location within [Docker Hub](https://hub.docker.com):
 

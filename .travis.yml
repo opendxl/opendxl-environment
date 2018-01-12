@@ -10,6 +10,8 @@ node_js:
   
 install:
   - docker pull opendxl/opendxl-environment
+  - docker run -d -p 127.0.0.1:8000:8000 opendxl/oopendxl-environment
+  - docker ps -a
 
 script:
   - wget http://localhost:8000

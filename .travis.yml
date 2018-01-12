@@ -1,12 +1,15 @@
 sudo: false
 
-language: python
+language: node_js
 
 services:
   - docker
 
-python:
-  - "2.7"
-
+node_js:
+  - "node"
+  
 install:
   - docker pull opendxl/opendxl-environment
+
+script:
+  - wget http://localhost:8000

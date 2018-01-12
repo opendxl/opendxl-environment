@@ -1,0 +1,12 @@
+sudo: false
+
+language: python
+
+services:
+  - docker
+
+python:
+  - "2.7"
+
+install:
+  - docker pull opendxl/opendxl-environment

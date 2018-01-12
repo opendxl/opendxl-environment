@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/opendxl/opendxl-environment.png?branch=master)](https://travis-ci.org/opendxl/opendxl-environment)
+
 # OpenDXL Environment
 
 ## Overview

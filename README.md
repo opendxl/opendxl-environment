@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/opendxl/opendxl-environment.png?branch=master)](https://travis-ci.org/opendxl/opendxl-environment)
+[![Docker Build Status](https://img.shields.io/docker/build/opendxl/opendxl-environment.svg)](https://hub.docker.com/r/opendxl/opendxl-environment/)
 
 # OpenDXL Environment
 

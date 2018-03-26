@@ -1,0 +1,146 @@
+#!/usr/bin/env python
+
+#
+# Command line utility which sets auth credentials for the cloud commander
+# web ui
+#
+
+import argparse
+import getpass
+import hashlib
+import json
+import os
+import sys
+from collections import OrderedDict
+
+
+# raw_input from Python 2 was renamed to input in Python 3. The snippet
+# below allows code to use input for both python versions
+try:
+    input = raw_input
+except NameError:
+    pass
+
+PASSWORD_HASH_ALGORITHM = "sha512WithRSAEncryption"
+
+
+def _error(message):
+    sys.stderr.write("{}, exiting\n".format(message))
+    exit(1)
+
+
+def _create_command_line_parser():
+    parser = argparse.ArgumentParser(
+        description="set auth credentials for the cloud commander web ui")
+    parser.add_argument(
+        "-d", "--disable-auth", action="store_true",
+        required=False,
+        help="disable authentication (auth is enabled by default)")
+    parser.add_argument(
+        "-c", "--config-file", metavar="FILE",
+        default="cloudcmd.json",
+        help="config file to update (default is 'cloudcmd.json')")
+    parser.add_argument(
+        "-n", "--no-credential-prompts", action="store_true",
+        required=False,
+        help="do not prompt for credentials (default is to prompt)")
+    parser.add_argument(
+        "-u", "--username", metavar="USERNAME",
+        required=False,
+        help="user name for authentication")
+    parser.add_argument(
+        "-p", "--password", metavar="PASSWORD",
+        required=False,
+        help="password for authentication")
+    return parser
+
+
+def _get_username(args, config, auth):
+    username_from_config = config.get("username", "")
+    if args.username:
+        return_value = args.username
+    elif auth and not args.no_credential_prompts:
+        username_prompt = "Enter username{}: ".format(
+            " [default = " + username_from_config + "]"
+            if username_from_config else "")
+        prompt_value = input(username_prompt)
+        return_value = prompt_value if prompt_value else username_from_config
+    else:
+        return_value = config.get("username", "")
+    return return_value
+
+
+def _hashed_password(password):
+    if password:
+        hashobj = hashlib.new(PASSWORD_HASH_ALGORITHM)
+        password_as_bytes = password if isinstance(password, bytes) \
+            else password.encode()
+        hashobj.update(password_as_bytes)
+        return_value = hashobj.hexdigest()
+    else:
+        return_value = ""
+    return return_value
+
+
+def _get_password_and_algo(args, config, auth):
+    if args.password:
+        password = _hashed_password(args.password)
+        algo = PASSWORD_HASH_ALGORITHM
+    elif auth and not args.no_credential_prompts:
+        while True:
+            password = getpass.getpass("Enter password:")
+            confirm_value = getpass.getpass("Confirm password:")
+            if password != confirm_value:
+                print("Values for password do not match. Try again.")
+            else:
+                break
+        password = _hashed_password(password)
+        algo = PASSWORD_HASH_ALGORITHM
+    else:
+        password = config.get("password", "")
+        algo = config.get("algo", PASSWORD_HASH_ALGORITHM)
+    return password, algo
+
+
+def main():
+    parser = _create_command_line_parser()
+    args = parser.parse_args()
+
+    if os.path.isfile(args.config_file):
+        if not os.access(args.config_file, os.W_OK):
+            _error("No permission to write config file {}".format(
+                args.config_file))
+        with open(args.config_file) as json_file:
+            config = json.load(json_file, object_pairs_hook=OrderedDict)
+    else:
+        config_dir = os.path.dirname(args.config_file)
+        if config_dir and not os.path.exists(config_dir):
+            try:
+                os.makedirs(config_dir)
+            except OSError as e:
+                _error("Unable to create config dir {}, reason: ({})".format(
+                    config_dir, e))
+        config = {}
+
+    auth = not args.disable_auth
+    username = _get_username(args, config, auth)
+    password, algo = _get_password_and_algo(args, config, auth)
+
+    config["auth"] = auth
+    config["username"] = username
+    config["password"] = password
+    config["algo"] = algo
+
+    try:
+        with open(args.config_file, 'w') as json_file:
+            json_text = json.dumps(config, indent=4)
+            json_file.write("{}\n".format(json_text))
+    except IOError as e:
+        _error("Unable to write config file {}, reason: ({})".format(
+            args.config_file, e))
+
+    print("Updated credentials in {}".format(args.config_file))
+    print("cloudcmd needs to be restarted for the changes to take effect")
+
+
+main()

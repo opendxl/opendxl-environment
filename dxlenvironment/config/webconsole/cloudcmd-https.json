@@ -1,0 +1,5 @@
+{
+    "https": true,
+    "private_key": "/opendxl/keystore/cloudcmd.key",
+    "cert": "/opendxl/keystore/cloudcmd-bundle.crt"
+}

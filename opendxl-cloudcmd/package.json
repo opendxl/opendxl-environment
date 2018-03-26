@@ -1,0 +1,20 @@
+{
+    "name": "opendxl-cloudcmd",
+    "version": "0.0.1",
+    "description": "Wrapper to cloudcmd which adds https server support",
+    "dependencies": {
+        "cloudcmd": "*",
+        "express": "*",
+        "gritty": "*",
+        "minimist": "*",
+        "socket.io": "*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/opendxl/opendxl-environment"
+    },
+    "bin": {
+        "opendxl-cloudcmd": "opendxl-cloudcmd.js"
+    },
+    "license": "Apache-2.0"
+}

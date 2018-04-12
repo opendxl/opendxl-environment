@@ -3,7 +3,7 @@ FROM python:2.7-slim
 VOLUME ["/opendxl"]
 
 RUN apt-get update \
-    && apt-get install -y curl git unzip wget telnet \
+    && apt-get install -y curl git unzip wget telnet vim \
     && curl -sL https://deb.nodesource.com/setup_8.x | /bin/bash - \
     && apt-get install -y nodejs build-essential \
     && npm i cloudcmd -g \
@@ -11,7 +11,7 @@ RUN apt-get update \
     && apt-get remove -y --auto-remove build-essential \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && pip install sphinx dxlclient==4.0.0.417 dxlbootstrap==0.1.4
+    && pip install sphinx dxlclient==4.0.0.418 dxlbootstrap==0.1.4 twine
 
 COPY files/.bashrc /root
 COPY files/edit.json /usr/lib/node_modules/cloudcmd/node_modules/edward/json/

@@ -14,6 +14,7 @@ RUN apt-get update \
     && pip install sphinx dxlclient==4.0.0.418 dxlbootstrap==0.1.4 twine
 
 COPY files/.bashrc /root
+COPY files/vimrc.local /etc/vim
 COPY files/edit.json /usr/lib/node_modules/cloudcmd/node_modules/edward/json/
 COPY dxlenvironment /dxlenvironment
 

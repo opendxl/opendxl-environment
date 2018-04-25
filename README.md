@@ -9,6 +9,8 @@ The OpenDXL Environment is a pre-configured environment available as a [Docker](
 
 The OpenDXL Environment is based on the [Debian operating system](https://www.debian.org/) and includes standard tools and libraries that are commonly used to develop and run OpenDXL solutions. The environment also includes a [web front-end](https://github.com/opendxl/opendxl-environment/wiki/Console-Overview) based on [Cloud Commander](http://cloudcmd.io/) that supports browser-based file management, file editing, and terminal access.
 
+The environment supports both versions of Python (2 and 3). The default `python` and `pip` executables support Python 2. The `python3` and `pip3` executables support Python 3.
+
 The goal of the OpenDXL Environment is to provide a consistent way to develop OpenDXL solutions across platforms and eliminate the need to manually install commonly used tools (git, wget, curl, etc.) and libraries ([OpenDXL Python Client](https://github.com/opendxl/opendxl-client-python), [OpenDXL Bootstrap](https://github.com/opendxl/opendxl-bootstrap-python)).
 
 The OpenDXL Environment Docker image is available at the following location within [Docker Hub](https://hub.docker.com):

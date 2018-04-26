@@ -11,7 +11,7 @@ RUN apt-get update \
     && apt-get remove -y --auto-remove build-essential \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && pip install sphinx dxlclient==4.0.0.418 dxlbootstrap==0.1.4 twine
+    && pip install sphinx dxlclient==4.1.0.185 dxlbootstrap==0.2.0 twine
     
 RUN wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' && \
 	python3 get-pip.py --disable-pip-version-check --no-cache-dir && \

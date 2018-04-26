@@ -10,13 +10,15 @@ RUN apt-get update \
     && npm i gritty \
     && apt-get remove -y --auto-remove build-essential \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip install sphinx dxlclient==4.1.0.185 dxlbootstrap==0.2.0 twine
+    && rm -rf /var/lib/apt/lists/*
     
 RUN wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' && \
 	python3 get-pip.py --disable-pip-version-check --no-cache-dir && \
     rm -f get-pip.py && \
     cp -f /usr/local/bin/pip2 /usr/local/bin/pip
+    
+RUN pip install sphinx dxlclient==4.1.0.185 dxlbootstrap==0.2.0 twine && \
+    pip3 install sphinx dxlclient==4.1.0.185 dxlbootstrap==0.2.0 twine
 
 COPY files/.bashrc /root
 COPY files/vimrc.local /etc/vim

@@ -17,8 +17,8 @@ RUN wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' && \
     rm -f get-pip.py && \
     cp -f /usr/local/bin/pip2 /usr/local/bin/pip
     
-RUN pip3 install sphinx dxlclient==4.1.0.185 dxlbootstrap==0.2.0 twine && \
-    pip install sphinx dxlclient==4.1.0.185 dxlbootstrap==0.2.0 twine
+RUN pip3 install sphinx dxlclient==4.1.0.186 dxlbootstrap==0.2.0 twine && \
+    pip install sphinx dxlclient==4.1.0.186 dxlbootstrap==0.2.0 twine
 
 COPY files/.bashrc /root
 COPY files/vimrc.local /etc/vim

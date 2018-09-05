@@ -1,5 +1,8 @@
 FROM python:2.7-slim
 
+ARG DXL_CLIENT_VERSION=4.1.0.187
+ARG DXL_BOOTSTRAP_VERSION=0.2.0
+
 VOLUME ["/opendxl"]
 
 RUN apt-get update \
@@ -17,8 +20,8 @@ RUN wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' && \
     rm -f get-pip.py && \
     cp -f /usr/local/bin/pip2 /usr/local/bin/pip
     
-RUN pip3 install sphinx dxlclient==4.1.0.186 dxlbootstrap==0.2.0 twine && \
-    pip install sphinx dxlclient==4.1.0.186 dxlbootstrap==0.2.0 twine
+RUN pip3 install sphinx dxlclient==${DXL_CLIENT_VERSION} dxlbootstrap==${DXL_BOOTSTRAP_VERSION} twine && \
+    pip install sphinx dxlclient==${DXL_CLIENT_VERSION} dxlbootstrap==${DXL_BOOTSTRAP_VERSION} twine
 
 COPY files/.bashrc /root
 COPY files/vimrc.local /etc/vim

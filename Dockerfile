@@ -2,14 +2,16 @@ FROM python:2.7-slim
 
 ARG DXL_CLIENT_VERSION=4.1.0.187
 ARG DXL_BOOTSTRAP_VERSION=0.2.0
+ARG CLOUDCMD_VERSION=^10.0.0
+ARG NODE_SETUP=setup_8.x
 
 VOLUME ["/opendxl"]
 
 RUN apt-get update \
     && apt-get install -y curl git unzip wget telnet vim python3 gnupg iproute2 \
-    && curl -sL https://deb.nodesource.com/setup_8.x | /bin/bash - \
+    && curl -sL https://deb.nodesource.com/${NODE_SETUP} | /bin/bash - \
     && apt-get install -y nodejs build-essential \
-    && npm i cloudcmd -g \
+    && npm i cloudcmd@${CLOUDCMD_VERSION} -g \
     && npm i gritty \
     && apt-get remove -y --auto-remove build-essential \
     && apt-get clean \

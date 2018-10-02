@@ -3,6 +3,7 @@ FROM python:2.7-slim
 ARG DXL_CLIENT_VERSION=4.1.0.187
 ARG DXL_BOOTSTRAP_VERSION=0.2.0
 ARG CLOUDCMD_VERSION=^10.0.0
+ARG GRITTY_VERSION=^3.0.0
 ARG NODE_SETUP=setup_6.x
 
 VOLUME ["/opendxl"]
@@ -12,7 +13,7 @@ RUN apt-get update \
     && curl -sL https://deb.nodesource.com/${NODE_SETUP} | /bin/bash - \
     && apt-get install -y nodejs build-essential \
     && npm i cloudcmd@${CLOUDCMD_VERSION} -g \
-    && npm i gritty \
+    && npm i gritty@${GRITTY_VERSION} \
     && apt-get remove -y --auto-remove build-essential \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*

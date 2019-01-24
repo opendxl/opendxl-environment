@@ -19,7 +19,10 @@ RUN apt-get update \
     && npm install -g bootprint-opendxl \
     && apt-get remove -y --auto-remove build-essential \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p /root/dxlschema/v0.1 \
+    && cd /root/dxlschema/v0.1 \
+    && wget https://opendxl.github.io/opendxl-api-specification/v0.1/schema.json
     
 RUN wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' && \
 	python3 get-pip.py --disable-pip-version-check --no-cache-dir && \

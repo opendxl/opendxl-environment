@@ -15,17 +15,22 @@ RUN apt-get update \
     && apt-get install -y nodejs build-essential openjdk-8-jdk-headless \
     && npm i cloudcmd@${CLOUDCMD_VERSION} -g \
     && npm i gritty@${GRITTY_VERSION} \
+    && npm install -g bootprint \
+    && npm install -g bootprint-opendxl \
     && apt-get remove -y --auto-remove build-essential \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p /root/dxlschema/v0.1 \
+    && cd /root/dxlschema/v0.1 \
+    && wget https://opendxl.github.io/opendxl-api-specification/v0.1/schema.json
     
 RUN wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' && \
 	python3 get-pip.py --disable-pip-version-check --no-cache-dir && \
     rm -f get-pip.py && \
     cp -f /usr/local/bin/pip2 /usr/local/bin/pip
     
-RUN pip3 install sphinx dxlclient==${DXL_CLIENT_VERSION} dxlbootstrap==${DXL_BOOTSTRAP_VERSION} twine && \
-    pip install sphinx dxlclient==${DXL_CLIENT_VERSION} dxlbootstrap==${DXL_BOOTSTRAP_VERSION} twine
+RUN pip3 install sphinx dxlclient==${DXL_CLIENT_VERSION} dxlbootstrap==${DXL_BOOTSTRAP_VERSION} twine jsonschema && \
+    pip install sphinx dxlclient==${DXL_CLIENT_VERSION} dxlbootstrap==${DXL_BOOTSTRAP_VERSION} twine jsonschema
 
 COPY files/.bashrc /root
 COPY files/vimrc.local /etc/vim

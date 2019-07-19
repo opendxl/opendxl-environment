@@ -1,4 +1,4 @@
-FROM python:2.7-slim
+FROM python:2.7-slim-stretch
 
 ARG DXL_CLIENT_VERSION=5.6.0.1
 ARG DXL_BOOTSTRAP_VERSION=0.2.2

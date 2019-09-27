@@ -2,6 +2,7 @@ FROM python:2.7-slim-stretch
 
 ARG DXL_CLIENT_VERSION=5.6.0.1
 ARG DXL_BOOTSTRAP_VERSION=0.2.2
+ARG WS_VERSION=6.1.4
 ARG CLOUDCMD_VERSION=^9.0.0
 ARG GRITTY_VERSION=^3.0.0
 ARG NODE_SETUP=setup_6.x
@@ -13,6 +14,7 @@ RUN apt-get update \
     && curl -sL https://deb.nodesource.com/${NODE_SETUP} | /bin/bash - \
     && mkdir -p /usr/share/man/man1 \
     && apt-get install -y nodejs build-essential openjdk-8-jdk-headless \
+    && npm i ws@${WS_VERSION} -g \
     && npm i cloudcmd@${CLOUDCMD_VERSION} -g \
     && npm i gritty@${GRITTY_VERSION} \
     && npm install -g bootprint \

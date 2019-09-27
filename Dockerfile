@@ -17,8 +17,8 @@ RUN apt-get update \
     && apt-get install -y nodejs build-essential openjdk-8-jdk-headless \
     && npm i socket.io@${SOCKET_IO_VERSION} -g \
     && npm i ws@${WS_VERSION} -g \
-    && npm i cloudcmd@${CLOUDCMD_VERSION} -g \
-    && npm i gritty@${GRITTY_VERSION} \
+    && npm i cloudcmd@${CLOUDCMD_VERSION} socket.io@${SOCKET_IO_VERSION} -g \
+    && npm i gritty@${GRITTY_VERSION} socket.io@${SOCKET_IO_VERSION} \
     && npm install -g bootprint \
     && npm install -g bootprint-opendxl \
     && apt-get remove -y --auto-remove build-essential \

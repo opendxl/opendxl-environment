@@ -1,0 +1,31 @@
+
+name: Build
+
+on: 
+  push:
+    branches:
+      - master
+  pull_request:
+  schedule:
+    - cron:  '0 0 * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        submodules: recursive
+        
+    - name: Install environment
+      run: |
+        docker pull opendxl/opendxl-environment
+        docker run -d -p 127.0.0.1:8000:8000 opendxl/opendxl-environment
+        docker ps -a
+
+    - name: Execute CI
+      run: |
+        wget http://localhost:8000

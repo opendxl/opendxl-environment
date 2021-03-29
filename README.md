@@ -1,5 +1,5 @@
 [![Actions Status](https://github.com/opendxl/opendxl-environment/workflows/Build/badge.svg)](https://github.com/opendxl/opendxl-environment/actions)
-[![Docker Build Status](https://img.shields.io/docker/build/opendxl/opendxl-environment.svg)](https://hub.docker.com/r/opendxl/opendxl-environment/)
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/opendxl/opendxl-environment.svg)](https://hub.docker.com/r/opendxl/opendxl-environment/)
 
 # OpenDXL Environment
 
